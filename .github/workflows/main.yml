@@ -25,8 +25,11 @@ jobs:
 
       - name: Push to Hugging Face hub
         env:
-          GIT_ASKPASS: /bin/echo
           HF_TOKEN: ${{ secrets.HF }}
         run: |
-          echo "${HF_TOKEN}" | git credential-cache store
-          git push --force space main
+          git config --global credential.helper store
+          echo "https://huggingface.co/spaces/Manah1820/demo2" > ~/.git-credentials
+          echo "username:${HF_TOKEN}" >> ~/.git-credentials
+
+      - name: Push to Hugging Face hub
+        run: git push --force space main
