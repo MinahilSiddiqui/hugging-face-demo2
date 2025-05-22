@@ -3,33 +3,21 @@ on:
   push:
     branches: [main]
 
-  # To run this workflow manually from the Actions tab
+  # to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Set up Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Add Hugging Face remote
-        run: git remote add space https://huggingface.co/spaces/Manah1820/demo2
-
-      - name: Push to Hugging Face hub
+      - name: Add remote 
         env:
-          HF_TOKEN: ${{ secrets.HF }}
-        run: |
-          git config --global credential.helper store
-          echo "https://huggingface.co/spaces/Manah1820/demo2" > ~/.git-credentials
-          echo "username:${HF_TOKEN}" >> ~/.git-credentials
-
-      - name: Push to Hugging Face hub
-        run: git push --force space main
+          HF: ${{ secrets.HF }}
+        run: git remote add space https://Manah1820:$HF@huggingface.co/spaces/Manah1820/demo2
+      - name: Push to hub
+        env:
+          HF: ${{ secrets.HF }}
+        run: git push --force https://Manah1820:$HF@huggingface.co/spaces/Manah1820/demo2
