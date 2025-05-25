@@ -1,3 +1,11 @@
+title: {{Text summarization}}
+emoji: {{✍️}}
+colorFrom: {{green}}
+colorTo: {{purple}}
+sdk: {{gradio}}
+sdk_version: "{{3.23.0}}"
+app_file: app.py
+pinned: false
 title: "Text Summarizer"
 emoji: "✍️"
 colorFrom: "purple"
